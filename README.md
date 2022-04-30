@@ -1,1 +1,1 @@
-# electric-load-forecasting
+# electric-demand-forecasting
