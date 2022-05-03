@@ -44,9 +44,9 @@ def join_data(df_left,df_right,link_fields,link_type):
 def data_transformation():
     # Import raw data 
     df_temperatures=read_csv('./data/raw_data/temperatures.csv')
-    df_bank_holidays=read_csv('.data/raw_data/bank_holidays.csv')
-    df_electricity_demand=read_csv('.data/raw_data/electricity_demand.csv')
-    df_population=read_csv('.data/raw_data/population.csv')
+    df_bank_holidays=read_csv('./data/raw_data/bank_holidays.csv')
+    df_electricity_demand=read_csv('./data/raw_data/electricity_demand.csv')
+    df_population=read_csv('./data/raw_data/population.csv')
 
     # Drop not needed columns
     df_temperatures=drop_columns(df_temperatures,['Unnamed: 0'])
@@ -67,7 +67,7 @@ def data_transformation():
                     'Bilbao','Logroño']
 
     # Save table
-    send_to_csv(df_regions,".data/intermediate_data/regions.csv")
+    send_to_csv(df_regions,"./data/intermediate_data/regions.csv")
 
     # Print info
     print('----------------------- 12. finish region master definition -----------------------')
@@ -205,7 +205,7 @@ def data_transformation():
     send_to_csv(df_electricity_demand,'./data/intermediate_data/electricity_demand.csv')
 
     # Print info
-    print('----------------------- 20. finish Final table: Merge demand and temperature -----------------------')  
+    print('----------------------- 21. finish Final table: Merge demand and temperature -----------------------')  
     print(df_electricity_demand)
 
             
