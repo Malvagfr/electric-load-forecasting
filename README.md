@@ -18,14 +18,6 @@ The goal of this project is to provide a solution for predicting **the electrici
 - For defining the solution, Baktesting tecnique is used. This technique is crucial for ensuring that a ML solution will be feasible in the future.
 - The idea is reproducing the behaviour in the past so it's possible to test that final solution will have a good perforance in the future.
 
-## **🎯 Objectives**
-
-The goal of this project is to provide a solution for predicting **the electricity demand** in Spain peninsule for the 24 hours of next day before the day-ahead market session:
-
-- Predictions will be available everyday for the following day in hourly basis.
-- For defining the solution, Baktesting tecnique is used. This technique is crucial for ensuring that a ML solution will be feasible in the future.
-- The idea is reproducing the behaviour in the past so it's possible to test that final solution will have a good perforance in the future.
-
 
 Precictions are calculated using the following information in different regions of the country:
 
@@ -96,6 +88,8 @@ The prediction is done using:
        
  ```
 
- 
+## **🧩 Pipeline**
+
+![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/flow.jpg)
 
 
