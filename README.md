@@ -21,12 +21,12 @@ The goal of this project is to provide a solution for predicting **the electrici
 
 Precictions are calculated using the following information in different regions of the country:
 
-- **Temperature** 
-- **Population**
-- **Main Bank holidays** 
-- **Month of the year**
-- **Day of the week**
-- **Hour of the day**
+- **Temperature** (K)
+- **Population** (people)
+- **Main Bank holidays** (date)
+- **Month of the year** (month)
+- **Day of the week** (day)
+- **Hour of the day** (hour)
 
 For the backtesting solution, data from 2015 to 2021 is included.
 
@@ -51,6 +51,13 @@ The prediction is done using:
 
 
 ## **🗄 Folder structure**
+
+Project structure is the following:
+
+- **main_script.py** used for running the script locally.
+- **modules** for storing specific function used in the pipeline.
+- **notebooks** using during development and for final analysis.
+- **data** with all data needed.
 
 ```
  └── project
@@ -92,4 +99,43 @@ The prediction is done using:
 
 ![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/flow.jpg)
 
+When running the code, the following pipeline is taking place:
+
+- Fisrt, all the information is exported from the different SOTs (from 2015 to 2021):
+   - List of all bank holidays at region level.
+   - Electricity demand at country leven in MWh.
+   - Yearly population at region level.
+   - Hourly temperature for main cities in the country. For exporting the temperature, the following cities have been included:
+     ![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/main_cities.jpg)
+
+- Second, all raw data is joined in a single table:
+   -  A population ratio is calculated for each region so a total country temperature is calculated depending on the population of each region.
+   -  Partial bank holidays are ponderated with the population and a total country bank holiday is calculated.
+   -  Electricity demand, population, temperature and bank holidays are joined in a table by date and hour.
+  
+  
+- Third, the machine learning backtesting is taking place:
+   -  Feature engineering: multiple options were tested. The best performance was with the following features:
+      - Month
+      - Day
+      - Hour
+      - Population
+      - Week_day (the day of the week)
+      - Week_day_category (whether is a weekday or weekend)
+      - Week_day_category in the previous and next day (24h)
+      - Bank_Holiday_Weight (from 0 to 1 depending of the population percentage with the holiday)
+      - Bank_Holiday_Weight in te previous and next day (24h) and in the previous week (168h)
+      - Temp_K
+      - Temp_K in the previous and next hour,2 hours, 24h, 48h, 72h, 96h, 120h, 144h and 168h
+      - Daily_Temp_K_mean (also previous 24h and 168h)
+      - Daily_Temp_K_std (also previous 24h and 168h)
+      - Daily_Temp_K_min (also previous 24h and 168h)
+      - Daily_Temp_K_max (also previous 24h and 168h)
+      
+   -  Model definition: XGBRegressor with a test split of 20% of the total rows.
+
+   -  Backtest calculation: 
+
+
+![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/flow.jpg)
 
