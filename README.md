@@ -19,7 +19,7 @@ The goal of this project is to provide a solution for predicting **the electrici
 - The idea is reproducing the behaviour in the past so it's possible to test that final solution will have a good perforance in the future.
 
 
-Precictions are calculated using the following information in different regions of the country:
+Precictions are calculated using the following information for different regions of the country:
 
 - **Temperature** (K)
 - **Population** (people)
@@ -33,7 +33,7 @@ For the backtesting solution, data from 2015 to 2021 is included.
 The prediction is done using:
 
 - **Regression Supervised Learning** 
-- **Prediction's accuracy** is meassured using **RMSE** (Root Mean Square Error).
+- **Prediction's accuracy** is meassured using **RMSE** (Root Mean Square Error) and mae (Mean absolute error).
 
 
 ## **👩🏻‍💻 Resources**
@@ -46,7 +46,7 @@ The prediction is done using:
 
 - **Bank holidays by region and year**: Information coming from [public source](https://administracion.gob.es/pag_Home/atencionCiudadana/calendarios/diasInhabiles.html#-b95725c1af8d).
 - **2m dewpoint temperature	(K)**: Information exported from [ERA5](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-pressure-levels?tab=overview).
-- **Popoulation**: Information coming from [INE](https://www.ine.es/jaxiT3/Datos.htm?t=2915).
+- **Population**: Information coming from [INE](https://www.ine.es/jaxiT3/Datos.htm?t=2915).
 - **Past demand**: Information coming from [public source](https://www.ree.es/es/apidatos).
 
 
@@ -131,11 +131,45 @@ When running the code, the following pipeline is taking place:
       - Daily_Temp_K_std (also previous 24h and 168h)
       - Daily_Temp_K_min (also previous 24h and 168h)
       - Daily_Temp_K_max (also previous 24h and 168h)
-      
+
    -  Model definition: XGBRegressor with a test split of 20% of the total rows.
 
    -  Backtest calculation: 
+         - Parameters definition:
 
+                - begin_training: 2015-01-01 00:00:00 (the first day available in the dataset)
+                - begin_forecast: 2015-12-31 11:00:00 (the first forecast is provided in the day before of 2016-01-01)
+                - end_forecast: 2021-12-29 11:00:00 (the last forecast is provided in the day before of 2021-12-30 due to the laglead)
+                - step=24 hours (predictions are launched everyday)
+                - training_frequency=30 (model training is launched everymonth)
+                - market_tz="Europe/Madrid" (local time)
+                - data_tz='UTC' (SOTs data is in UTC)
+       
+         - Predictions are launched everyday at predict 24 hours of last day 
+         - The model is training every month
 
-![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/flow.jpg)
+## **🔍 Results**
 
+- Displaying features, can be concluded that the more correlaed ones with the demand are: Hour, Country_Bank_Holiday, Population and Temperature: 
+
+![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/correlation_matrix.jpg)
+
+- Final correlation including feature engineering shows that temperature features have a good performance:
+
+![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/final_correlation.jpg)
+ 
+ - Final prediction values are the following:
+   -  rmse:  1347.48
+   -  mae:  994.59
+   -  **mae normalized:  3.51  %**
+   -  Absolute error is:
+
+![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/absolute_error.jpg)
+
+## **🪜 Continue working**
+For future developments, a nice to have can be:
+
+- Including recursive predition.
+- Including future preditions with temperature predictions
+- Including results vis.
+ 
