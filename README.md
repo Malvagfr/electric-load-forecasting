@@ -33,7 +33,7 @@ For the backtesting solution, data from 2015 to 2021 is included.
 The prediction is done using:
 
 - **Regression Supervised Learning** 
-- **Prediction's accuracy** is meassured using **RMSE** (Root Mean Square Error) and mae (Mean absolute error).
+- **Prediction's accuracy** is meassured using **RMSE** (Root Mean Square Error) and **MAE*** (Mean absolute error).
 
 
 ## **👩🏻‍💻 Resources**
@@ -117,7 +117,6 @@ When running the code, the following pipeline is taking place:
 - Third, the machine learning backtesting is taking place:
    -  Feature engineering: multiple options were tested. The best performance was with the following features:
       - Month
-      - Day
       - Hour
       - Population
       - Week_day (the day of the week)
@@ -126,7 +125,7 @@ When running the code, the following pipeline is taking place:
       - Bank_Holiday_Weight (from 0 to 1 depending of the population percentage with the holiday)
       - Bank_Holiday_Weight in te previous and next day (24h) and in the previous week (168h)
       - Temp_K
-      - Temp_K in the previous and next hour,2 hours, 24h, 48h, 72h, 96h, 120h, 144h and 168h
+      - Temp_K in the previous hour,2 hours, 24h, 48h, 72h, 96h, 120h, 144h and 168h
       - Daily_Temp_K_mean (also previous 24h and 168h)
       - Daily_Temp_K_std (also previous 24h and 168h)
       - Daily_Temp_K_min (also previous 24h and 168h)
@@ -141,7 +140,7 @@ When running the code, the following pipeline is taking place:
                 - begin_forecast: 2015-12-31 11:00:00 (the first forecast is provided in the day before of 2016-01-01)
                 - end_forecast: 2021-12-29 11:00:00 (the last forecast is provided in the day before of 2021-12-30 due to the laglead)
                 - step=24 hours (predictions are launched everyday)
-                - training_frequency=30 (model training is launched everymonth)
+                - training_frequency=30 days (model training is launched everymonth)
                 - market_tz="Europe/Madrid" (local time)
                 - data_tz='UTC' (SOTs data is in UTC)
        

@@ -118,15 +118,15 @@ def temperature_extraction():
         # Stort each city values
         df_temperatures.append(df_city)
 
-        # Concatenate all cities 
-        df_temperatures = pd.concat(df_temperatures)
+    # Concatenate all cities 
+    df_temperatures = pd.concat(df_temperatures)
 
-        # Send data to csv
-        send_to_csv(df_temperatures,"./data/SOTs/hourly_temperature/raw_temperatures.csv")
+    # Send data to csv
+    send_to_csv(df_temperatures,"./data/SOTs/hourly_temperature/raw_temperatures.csv")
 
-        # Print result
-        print('----------------------- 8. starting temperature load -----------------------')
-        print(df_temperatures)
+    # Print result
+    print('----------------------- 8. finish temperature load -----------------------')
+    print(df_temperatures)
 
 
 def temperature_data_cleaning():
