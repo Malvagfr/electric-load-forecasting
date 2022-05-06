@@ -165,6 +165,10 @@ When running the code, the following pipeline is taking place:
 
 ![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/absolute_error.jpg)
 
+- Next image shows average error by year and can explain the influence of COVID situation in prediction results:
+
+![Image](https://github.com/Malvagfr/electric-load-forecasting/blob/main/images/mean_error_year.jpg)
+
 ## **🪜 Continue working**
 For future developments, a nice to have can be:
 
