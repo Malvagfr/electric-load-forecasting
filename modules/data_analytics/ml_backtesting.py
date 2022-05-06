@@ -178,7 +178,6 @@ def ml_backtest():
     # Forecast is launch each day at 11:00 o'clock in local time
     begin_forecast=datetime.strptime('2015-12-31 11:00:00', '%Y-%m-%d %H:%M:%S')
     end_forecast=datetime.strptime('2021-12-29 11:00:00', '%Y-%m-%d %H:%M:%S')
-    end_forecast=datetime.strptime('2016-05-16 11:00:00', '%Y-%m-%d %H:%M:%S') #TO DELETE for testing purposes
 
     # Data is predicted everyday (24 hours)
     step=24 

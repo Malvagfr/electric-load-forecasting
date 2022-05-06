@@ -20,7 +20,7 @@ def main():
     de_bh.extract_bank_holidays()
     de_ed.extract_electric_demand()
     de_po.extract_population()
-    #de_te.extract_temperature()
+    de_te.extract_temperature()
 
     # Data transformation
     dt.data_transformation()
